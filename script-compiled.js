@@ -2,6 +2,16 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -82,20 +92,20 @@ var Stopwatch = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return React.createElement(
+      return _react2.default.createElement(
         'div',
         { className: 'container' },
-        React.createElement(
+        _react2.default.createElement(
           'button',
           { onClick: this.start },
           'START'
         ),
-        React.createElement(
+        _react2.default.createElement(
           'button',
           { onClick: this.stop },
           'STOP'
         ),
-        React.createElement(
+        _react2.default.createElement(
           'p',
           null,
           this.format({
@@ -109,7 +119,7 @@ var Stopwatch = function (_React$Component) {
   }]);
 
   return Stopwatch;
-}(React.Component);
+}(_react2.default.Component);
 
 function pad0(value) {
   var result = value.toString();
@@ -119,4 +129,4 @@ function pad0(value) {
   return result;
 }
 
-ReactDOM.render(React.createElement(Stopwatch, null), document.getElementsByClassName('stopwatch'));
+_reactDom2.default.render(_react2.default.createElement(Stopwatch, null), document.getElementById('root'));

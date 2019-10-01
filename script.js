@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 class Stopwatch extends React.Component {
   constructor() {
     super();
@@ -79,4 +82,4 @@ function pad0(value) {
   return result;
 }
 
-ReactDOM.render(<Stopwatch/>, document.getElementsByClassName('stopwatch'));
+ReactDOM.render(<Stopwatch />, document.getElementById('root'));
