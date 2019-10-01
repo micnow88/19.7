@@ -14,14 +14,6 @@ class Stopwatch extends React.Component {
     this.stop = this.stop.bind(this);
   }
 
-  /*reset() {
-    this.times = {
-      minutes: 0,
-      seconds: 0,
-      miliseconds: 0
-    };
-  }*/
-
   format(times) {
     return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(Math.floor(times.miliseconds))}`;
   }
@@ -64,7 +56,7 @@ class Stopwatch extends React.Component {
 
   render() {
     return (
-      <div className = "container">
+      <div className="container">
         <button onClick={this.start}>START</button>
         <button onClick={this.stop}>STOP</button>
         <p>
@@ -88,11 +80,3 @@ function pad0(value) {
 }
 
 ReactDOM.render(<Stopwatch/>, document.getElementsByClassName('stopwatch'));
-/*const stopwatch = new Stopwatch(
-document.querySelector('.stopwatch'));
-
-let startButton = document.getElementById('start');
-startButton.addEventListener('click', () => stopwatch.start());
-
-let stopButton = document.getElementById('stop');
-stopButton.addEventListener('click', () => stopwatch.stop());*/
