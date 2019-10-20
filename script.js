@@ -3,19 +3,22 @@ class Stopwatch extends React.Component {
     super();
     this.state = {
       running: false,
-      minuts: 0,
-      seconds: 0,
-      miliseconds: 0
+      times: {
+        minuts: 0,
+        seconds: 0,
+        miliseconds: 0
+      }
     };
-    this.format = this.format.bind(this);
+    /*this.format = this.format.bind(this);
     this.start = this.start.bind(this);
     this.step = this.step.bind(this);
     this.calculate = this.calculate.bind(this);
-    this.stop = this.stop.bind(this);
+    this.stop = this.stop.bind(this);*/
   }
 
-  format(times) {
-    return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(Math.floor(times.miliseconds))}`;
+  format() {
+    var {minutes, seconds, miliseconds} = this.state;
+    return `${pad0(minutes)}:${pad0(seconds)}:${pad0(Math.floor(miliseconds))}`;
   }
 
   start() {
@@ -26,15 +29,17 @@ class Stopwatch extends React.Component {
   }
 
   step() {
-    if (!this.state.running) return;
-    this.calculate();
+    if (!this.state.running)
+      return
+        this.calculate();
   }
 
   calculate() {
-    let miliseconds = this.state.miliseconds += 1,
-      seconds = this.state.seconds,
-      minutes = this. state.minutes;
-    if (miliseconds >= 100) {
+    let {miliseconds, seconds, minutes} = this.state;
+      miliseconds = miliseconds += 10,
+      seconds = seconds,
+      minutes = minutes;
+    if (miliseconds >= 1000) {
       seconds += 1;
       miliseconds = 0;
     }
@@ -42,7 +47,7 @@ class Stopwatch extends React.Component {
       minutes += 1;
       seconds = 0;
     }
-    this.state({
+    this.setState({
       minutes,
       seconds,
       miliseconds
@@ -79,4 +84,4 @@ function pad0(value) {
   return result;
 }
 
-ReactDOM.render(<Stopwatch />, document.getElementById('root'));
+ReactDOM.render(<Stopwatch />, document.getElementById("root"));

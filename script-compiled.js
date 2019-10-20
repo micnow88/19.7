@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18,25 +18,32 @@ var Stopwatch = function (_React$Component) {
 
     _this.state = {
       running: false,
-      minuts: 0,
-      seconds: 0,
-      miliseconds: 0
+      times: {
+        minuts: 0,
+        seconds: 0,
+        miliseconds: 0
+      }
     };
-    _this.format = _this.format.bind(_this);
-    _this.start = _this.start.bind(_this);
-    _this.step = _this.step.bind(_this);
-    _this.calculate = _this.calculate.bind(_this);
-    _this.stop = _this.stop.bind(_this);
+    /*this.format = this.format.bind(this);
+    this.start = this.start.bind(this);
+    this.step = this.step.bind(this);
+    this.calculate = this.calculate.bind(this);
+    this.stop = this.stop.bind(this);*/
     return _this;
   }
 
   _createClass(Stopwatch, [{
-    key: 'format',
-    value: function format(times) {
-      return pad0(times.minutes) + ':' + pad0(times.seconds) + ':' + pad0(Math.floor(times.miliseconds));
+    key: "format",
+    value: function format() {
+      var _state = this.state,
+          minutes = _state.minutes,
+          seconds = _state.seconds,
+          miliseconds = _state.miliseconds;
+
+      return pad0(minutes) + ":" + pad0(seconds) + ":" + pad0(Math.floor(miliseconds));
     }
   }, {
-    key: 'start',
+    key: "start",
     value: function start() {
       var _this2 = this;
 
@@ -48,18 +55,21 @@ var Stopwatch = function (_React$Component) {
       }
     }
   }, {
-    key: 'step',
+    key: "step",
     value: function step() {
       if (!this.state.running) return;
       this.calculate();
     }
   }, {
-    key: 'calculate',
+    key: "calculate",
     value: function calculate() {
-      var miliseconds = this.state.miliseconds += 1,
-          seconds = this.state.seconds,
-          minutes = this.state.minutes;
-      if (miliseconds >= 100) {
+      var _state2 = this.state,
+          miliseconds = _state2.miliseconds,
+          seconds = _state2.seconds,
+          minutes = _state2.minutes;
+
+      miliseconds = miliseconds += 10, seconds = seconds, minutes = minutes;
+      if (miliseconds >= 1000) {
         seconds += 1;
         miliseconds = 0;
       }
@@ -67,36 +77,36 @@ var Stopwatch = function (_React$Component) {
         minutes += 1;
         seconds = 0;
       }
-      this.state({
+      this.setState({
         minutes: minutes,
         seconds: seconds,
         miliseconds: miliseconds
       });
     }
   }, {
-    key: 'stop',
+    key: "stop",
     value: function stop() {
       this.setState({ running: false });
       clearInterval(this.watch);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       return React.createElement(
-        'div',
-        { className: 'container' },
+        "div",
+        { className: "container" },
         React.createElement(
-          'button',
+          "button",
           { onClick: this.start },
-          'START'
+          "START"
         ),
         React.createElement(
-          'button',
+          "button",
           { onClick: this.stop },
-          'STOP'
+          "STOP"
         ),
         React.createElement(
-          'p',
+          "p",
           null,
           this.format({
             minutes: this.state.minutes,
@@ -119,4 +129,4 @@ function pad0(value) {
   return result;
 }
 
-ReactDOM.render(React.createElement(Stopwatch, null), document.getElementById('root'));
+ReactDOM.render(React.createElement(Stopwatch, null), document.getElementById("root"));
